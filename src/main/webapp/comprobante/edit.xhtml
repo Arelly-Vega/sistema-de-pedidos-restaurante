@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+        Editar  Comprobante
+    </ui:define>
+
+
+
+    <ui:define name="body">
+        <h:form id="editform" prependId="false">
+
+            <p:panel styleClass="box-primary card">
+                <div id="main-buttons" class="hidden-sm hidden-xs">
+                    <p:commandButton value="Actualizar" action="#{comprobanteBean.update}"  update="@form"  
+                                     icon="fa fa-check" styleClass="btn-primary" />
+
+                    <p:spacer width="5"/>
+                    <p:commandButton value="Volver" immediate="true"
+                                     action="/comprobante/index?faces-redirect=true"
+                                     process="@this"
+                                     icon="fa fa-reply"/>
+                </div>
+
+
+                <p:separator/>
+
+                <div class="ui-g ui-fluid">
+
+                    <p:inputText id="txtid" value="#{comprobanteBean.comprobante.id}"  style="display: none"/>
+
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="Numero de mesa" for="inptNumM"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <p:selectOneMenu id="inptNumM" value="#{comprobanteBean.selectedMesaId}" required="true">
+                                <f:selectItems value="#{comprobanteBean.mesas}" var="mesa"
+                                               itemLabel="#{mesa.id}" itemValue="#{mesa.id}"/>
+                                
+                            </p:selectOneMenu>
+                            <span class="help-block"> 
+                                <p:message for="inptNumM" /> 
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="Nombre Cliente" for="inptnomC"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <p:inputText id="inptnomC" value="#{comprobanteBean.comprobante.nombrecliente}" required="true"/>
+                            <span class="help-block"> 
+                                <p:message for="inptnomC" /> 
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="Apellido Cliente" for="inptapeC"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <p:inputText id="inptapeC" value="#{comprobanteBean.comprobante.apellidocliente}" required="true"/>
+                            <span class="help-block"> 
+                                <p:message for="inptapeC" /> 
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="Metodo de Pago" for="inptmetP"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <p:selectOneMenu id="inptmetP" value="#{comprobanteBean.comprobante.pago}" required="true">
+                                <f:selectItems value="#{comprobanteBean.metodoPago}" var="metpag"
+                                               itemLabel="#{metpag}" itemValue="#{metpag}"/>
+                            </p:selectOneMenu>
+                            <span class="help-block"> 
+                                <p:message for="inptmetP" /> 
+                            </span>
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+
+            </p:panel>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
+                <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
